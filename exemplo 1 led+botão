@@ -1,0 +1,88 @@
+int led1 = 7;
+int led2 = 8;
+int led3 = 9;
+
+int botaoDireita = 10;
+int botaoEsquerda = 11;
+
+int ledAtual = 1;
+
+int estadoAnteriorEsquerda = HIGH;
+int estadoAnteriorDireita = HIGH;
+
+void setup() {
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+
+  pinMode(botaoEsquerda, INPUT);
+  pinMode(botaoDireita, INPUT);
+
+  digitalWrite(led1, HIGH);
+}
+
+void loop() {
+  int leituraEsquerda = digitalRead(botaoEsquerda);
+  int leituraDireita = digitalRead(botaoDireita);
+
+  if (leituraEsquerda == LOW && estadoAnteriorEsquerda == HIGH) {
+    moverEsquerda();
+  }
+
+  if (leituraDireita == LOW && estadoAnteriorDireita == HIGH) {
+    moverDireita();
+  }
+
+  estadoAnteriorEsquerda = leituraEsquerda;
+  estadoAnteriorDireita = leituraDireita;
+
+  delay(200);
+}
+
+void moverEsquerda() {
+  apagarLED(ledAtual);
+  if (ledAtual == 1) {
+    ledAtual = 3;  
+  } else {
+    ledAtual--;
+  }
+  acenderLED(ledAtual);
+}
+
+void moverDireita() {
+  apagarLED(ledAtual);
+  if (ledAtual == 3) {
+    ledAtual = 1;
+  } else {
+    ledAtual++;
+  }
+  acenderLED(ledAtual);
+}
+
+void acenderLED(int led) {
+  switch (led) {
+    case 1:
+      digitalWrite(led1, HIGH);
+      break;
+    case 2:
+      digitalWrite(led2, HIGH);
+      break;
+    case 3:
+      digitalWrite(led3, HIGH);
+      break;
+  }
+}
+
+void apagarLED(int led) {
+  switch (led) {
+    case 1:
+      digitalWrite(led1, LOW);
+      break;
+    case 2:
+      digitalWrite(led2, LOW);
+      break;
+    case 3:
+      digitalWrite(led3, LOW);
+      break;
+  }
+}
