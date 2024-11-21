@@ -1,0 +1,83 @@
+SEMÁFORO
+int g1 = 11;//verde
+int y1 = 12;//amarelo
+int r1 = 13;//vermelho
+int g2 = 10;//verde
+int y2 = 9;//amarelo
+int r2 = 8;//vermelho
+int g3 = 7;//vermelho1
+int y3 = 5;//vermelho2
+int g4 = 6;//verde1
+int y4 = 4;//verde2
+void setup (){
+pinMode(g1 , OUTPUT);
+pinMode(y1 , OUTPUT);
+pinMode(r1 , OUTPUT);
+pinMode(g2 , OUTPUT);
+pinMode(y2 , OUTPUT);
+pinMode(r2 , OUTPUT);
+pinMode(g3 , OUTPUT);
+pinMode(y3 , OUTPUT);
+pinMode(g4 , OUTPUT);
+pinMode(y4 , OUTPUT);
+}
+void loop (){
+digitalWrite(g1, HIGH);
+digitalWrite(r1, LOW);
+digitalWrite(g2, LOW);
+digitalWrite(r2, HIGH);
+digitalWrite(y1, LOW);
+delay(4000);
+digitalWrite(g1, LOW);
+digitalWrite(y1, HIGH);
+delay(2000);
+for(int x = 0 ; x <5; x++){//amarelo pisca
+digitalWrite(y1, HIGH);
+Universidade Estadual do Centro-Oeste
+Reconhecida pelo Decreto Estadual nº 3.444, de 8 de agosto de 19
+delay(400);
+digitalWrite(y1, LOW);
+delay(400);
+}
+digitalWrite(g2, HIGH);
+digitalWrite(r2, LOW);
+digitalWrite(g1, LOW);
+digitalWrite(r1, HIGH);
+digitalWrite(y1, LOW);
+delay(4000);
+digitalWrite(g2, LOW);
+digitalWrite(y2, HIGH);
+delay(2000);
+for(int x = 0 ; x <5; x++){//amarelo pisca
+digitalWrite(y2, HIGH);
+delay(400);
+digitalWrite(y2, LOW);
+delay(400);
+}
+{
+digitalWrite(g1, LOW);
+digitalWrite(r1, HIGH);
+digitalWrite(g2, LOW);
+digitalWrite(r2, HIGH);
+digitalWrite(y1, LOW);
+digitalWrite(y2, LOW);
+digitalWrite(g4, HIGH);
+digitalWrite(y4, HIGH);
+digitalWrite(g3, LOW);
+digitalWrite(y3, LOW);
+delay(000);
+}
+{
+digitalWrite(g1, LOW);
+digitalWrite(r1, LOW);
+digitalWrite(g2, LOW);
+digitalWrite(r2, LOW);
+digitalWrite(y1, LOW);
+digitalWrite(y2, LOW);
+digitalWrite(g4, LOW);
+digitalWrite(y4, LOW);
+digitalWrite(g3, HIGH);
+digitalWrite(y3, HIGH);
+delay(300);
+}
+}
