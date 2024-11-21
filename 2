@@ -1,0 +1,28 @@
+const int ledPin = 13; // Pino do LED
+const int buttonPin = 2; // Pino do botão
+bool isBlinking = true; // Indica se o LED está piscando
+unsigned long previousMillis = 0; // Armazena tempo anterior
+const long interval = 250; // Intervalo de 1 segundo
+bool ledState = LOW; // Estado do LED
+void setup() {
+pinMode(ledPin, OUTPUT); // Configura o pino do LED como saída
+pinMode(buttonPin, INPUT); // Configura o pino do botão como entrada
+digitalWrite(ledPin, LOW); // Garante que o LED inicie apagado
+}
+void loop() {
+// Verifica se o botão foi pressionado (debounce simples)
+if (digitalRead(buttonPin) == HIGH) {
+delay(200); // Anti-bouncing: evita múltiplos cliques
+isBlinking = !isBlinking; // Alterna o estado de piscagem
+}
+if (isBlinking) {
+unsigned long currentMillis = millis(); // Obtém tempo atual
+if (currentMillis - previousMillis >= interval) {
+previousMillis = currentMillis; // Atualiza o tempo anterior
+ledState = !ledState; // Alterna o estado do LED
+digitalWrite(ledPin, ledState); // Atualiza o LED
+}
+} else {
+digitalWrite(ledPin, LOW); // Garante que o LED permaneça apagado
+}
+}
