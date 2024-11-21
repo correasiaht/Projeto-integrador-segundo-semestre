@@ -1,0 +1,23 @@
+const int sensorPin = A0;  // Pino analógico onde o sensor de umidade está conectado
+const int ledPin = 13;     // Pino digital onde o LED está conectado
+const int threshold = 500; // Limite para detecção de umidade (ajuste conforme necessário)
+
+void setup() {
+    pinMode(ledPin, OUTPUT);
+    pinMode(sensorPin, INPUT);
+    Serial.begin(9600);  // Inicializa a comunicação serial para depuração
+}
+
+void loop() {
+    int sensorValue = analogRead(sensorPin);  // Lê o valor do sensor de umidade
+
+    // Verifica se o valor lido está acima do limite
+    if (sensorValue > threshold) {
+        digitalWrite(ledPin, HIGH);  // Acende o LED
+    } else {
+        digitalWrite(ledPin, LOW);   // Apaga o LED
+    }
+
+    Serial.println(sensorValue);  // Imprime o valor do sensor para depuração
+    delay(100);  // Pequeno atraso para estabilização
+}
