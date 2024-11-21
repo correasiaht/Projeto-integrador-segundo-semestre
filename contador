@@ -1,0 +1,36 @@
+int Pinos[] = {2,3,4,5,6,7,8,9};
+byte numeral[10][7]={
+{1,1,1,1,1,1,0}, // numero=0
+{0,1,1,0,0,0,0}, // numero=1
+{1,1,0,1,1,0,1}, // numero=2
+{1,1,1,1,0,0,1}, // numero=3
+{0,1,1,0,0,1,1}, // numero=4
+{1,0,1,1,0,1,1}, // numero=5
+{1,0,1,1,1,1,1}, // numero=6
+{1,1,1,0,0,0,0}, // numero=7
+{1,1,1,1,1,1,1}, // numero=8
+{1,1,1,0,0,1,1}, // numero=9
+};
+void setup()
+{
+for (int i=0;i<8;i++)
+pinMode(Pinos[i], OUTPUT); // inicializa os pinos como saídas
+}
+void escreversegmento(byte cont) // função que escreve o número no display
+{
+byte pino=2; // para o primeiro pino do Arduino (referente ao pino do display)
+for (byte contseg=0; contseg<7; contseg++)
+{
+digitalWrite(pino, numeral[cont][contseg]); // escreve o número
+pino++; // incrementa os pinos até o pino 8
+}
+digitalWrite(9,HIGH); // Ponto decimal no final da contagem
+}
+void loop()
+{
+for (byte contador=0;contador<10;contador++)
+{
+delay(1000);
+escreversegmento(contador); // chama função
+}
+}
