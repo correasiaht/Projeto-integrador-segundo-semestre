@@ -1,0 +1,60 @@
+int pinoLedVerde = 7;
+int pinoLedAmarelo = 8;
+int pinoLedVermelho = 9;
+
+int sinalLedVerde = HIGH;
+int sinalLedAmarelo = LOW;
+int sinalLedVermelho = LOW;
+
+int pinoBotaoDir = 10;
+int pinoBotaoEsq = 11;
+
+int sinalBotaoDir = LOW;
+int sinalBotaoEsq = LOW;
+
+void setup() {
+	pinMode(pinoLedVerde, OUTPUT);
+	pinMode(pinoLedAmarelo, OUTPUT);
+	pinMode(pinoLedVermelho, OUTPUT);
+	
+	pinMode(pinoBotaoDir, INPUT);
+	pinMode(pinoBotaoEsq, INPUT);
+}
+
+void loop() {
+	int leituraBotaoDir = digitalRead(pinoBotaoDir);
+	int leituraBotaoEsq = digitalRead(pinoBotaoEsq);
+	
+	if(sinalBotaoDir == LOW && leituraBotaoDir == HIGH) {
+		if(sinalLedVerde == HIGH) {
+			sinalLedVerde = LOW;
+			sinalLedAmarelo = HIGH;
+		} else {
+			if(sinalLedAmarelo == HIGH){
+				sinalLedAmarelo = LOW;
+				sinalLedVermelho = HIGH;
+			} else {
+				sinalLedVermelho = LOW;
+				sinalLedVerde = HIGH;
+			}
+		}
+	}
+	
+	if(sinalBotaoEsq == LOW && leituraBotaoEsq == HIGH) {
+		if(sinalLedVerde == HIGH) {
+			sinalLedVerde = LOW;
+			sinalLedVermelho = HIGH;
+		} else {
+			if(sinalLedAmarelo == HIGH){
+				sinalLedAmarelo = LOW;
+				sinalLedVerde = HIGH;
+			} else {
+				sinalLedVermelho = LOW;
+				sinalLedAmarelo = HIGH;
+			}
+		}
+	}
+
+	sinalBotaoDir = leituraBotaoDir;
+	sinalBotaoEsq = leituraBotaoEsq;
+}
