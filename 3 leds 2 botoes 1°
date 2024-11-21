@@ -1,0 +1,43 @@
+const int ledPin1 = 2;
+const int ledPin2 = 3;
+const int ledPin3 = 4;
+const int buttonRight = 5;
+const int buttonLeft = 6;
+
+int currentLed = 2;  // O LED do meio está inicializado como ligado
+
+void setup() {
+  pinMode(ledPin1, OUTPUT);
+  pinMode(ledPin2, OUTPUT);
+  pinMode(ledPin3, OUTPUT);
+  pinMode(buttonRight, INPUT);
+  pinMode(buttonLeft, INPUT);
+
+  digitalWrite(ledPin1, LOW);
+  digitalWrite(ledPin2, HIGH);  // LED do meio está ligado
+  digitalWrite(ledPin3, LOW);
+}
+
+void loop() {
+  if (digitalRead(buttonRight) == HIGH) {
+    changeLed('R');
+    delay(300);  // Debouncing
+  } else if (digitalRead(buttonLeft) == HIGH) {
+    changeLed('L');
+    delay(300);  // Debouncing
+  }
+}
+
+void changeLed(char direction) {
+  // Desligar o LED atual
+  digitalWrite(currentLed, LOW);
+
+  if (direction == 'R') {
+    currentLed = (currentLed == ledPin3) ? ledPin1 : currentLed + 1;
+  } else if (direction == 'L') {
+    currentLed = (currentLed == ledPin1) ? ledPin3 : currentLed - 1;
+  }
+
+  // Ligar o novo LED
+  digitalWrite(currentLed, HIGH);
+}
